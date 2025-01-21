@@ -24,7 +24,7 @@ export default function CarRentalDashboard() {
       category: "Sport Car",
       date: "20 July",
       price: 80.0,
-      image: "/Car2.svg",
+      image: "/car2.svg",
     },
     {
       id: 2,
