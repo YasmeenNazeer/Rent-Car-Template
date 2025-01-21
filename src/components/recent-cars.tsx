@@ -1,13 +1,13 @@
-"use client"
+
 import Image from "next/image"
 
 
 import { Button } from "@/components/ui/button"
 
-import { car5} from "@/constant/cars"
+
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import { client } from "@/sanity/lib/client"
+import { importCarData } from "@/services/api"
 
 
 interface Car {
@@ -22,27 +22,15 @@ interface Car {
   fuelCapacity:string;
   heartImage:string
 }
-export function RecentCars() {
+export async function RecentCars() {
        
-       const [cards, setCards] = useState<Car[]>([]);
-
-        useEffect(() => {
-          const importCarData = async () => {
-            const res: Car[] = await client.fetch(
-              "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
-            );
-            setCards(res);
-            if (!res || res.length === 0) {
-              importCarData();
-              const res: Car[] = await client.fetch(
-                "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
-              );
-              setCards(res);
-            }
-          };
-          importCarData();
-        }, [cards]);
-
+       const res: Car[] = await client.fetch(
+               "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
+             );
+             
+             if (!res || res.length === 0) {
+               importCarData();}
+       
 
 
 
@@ -57,7 +45,7 @@ export function RecentCars() {
 
 
      
-      {cards.slice(3,9).map((item:Car, index:number) => (
+      {res.slice(3,9).map((item:Car, index:number) => (
               <div className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]" key={index}>
                 {/* Header Section */}
                 <div className="flex items-center justify-between">

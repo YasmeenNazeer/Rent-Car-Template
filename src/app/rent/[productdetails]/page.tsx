@@ -150,7 +150,7 @@ export default async  function CarDetails({searchParams}:{searchParams:Promise<{
                
                  <PostCreator blog_id={0}/>
                  
-             <RecentCars/>
+             {await RecentCars()}
             </div>
     </main>
     </div>

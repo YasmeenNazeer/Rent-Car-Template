@@ -1,4 +1,4 @@
-"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
@@ -18,25 +18,15 @@ interface Car {
   heartImage: string;
 }
 
-function CarsSection() {
-  const [cards, setCards] = useState<Car[]>([]);
-
-  useEffect(() => {
-    const importCarData = async () => {
+async function CarsSection() {
+  
       const res: Car[] = await client.fetch(
         "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
       );
-      setCards(res);
+      
       if (!res || res.length === 0) {
-        importCarData();
-        const res: Car[] = await client.fetch(
-          "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
-        );
-        setCards(res);
-      }
-    };
-    importCarData();
-  }, [cards]);
+        importCarData();}
+        
 
   return (
     <>
@@ -52,7 +42,7 @@ function CarsSection() {
         {/* Cars Map */}
         <div className="px-6 py-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {cards.slice(8, 12).map((item: Car, index: number) => (
+            {res.slice(8, 12).map((item: Car, index: number) => (
               <div
                 className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]"
                 key={index}
@@ -143,7 +133,7 @@ function CarsSection() {
       </div>
       <div className="py-6 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {cards.slice(5, 13).map((item: Car, index: number) => (
+          {res.slice(5, 13).map((item: Car, index: number) => (
             <div
               className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]"
               key={index}

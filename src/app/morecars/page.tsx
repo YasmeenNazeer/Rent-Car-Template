@@ -1,5 +1,5 @@
 //src\app\morecars\page.tsx
-"use client";
+
 import PickDrop from "@/components/pick-drop";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/sidebar";
 import { client } from "@/sanity/lib/client";
 import { useEffect, useState } from "react";
+import { importCarData } from "@/services/api";
 
 interface Car {
   brand: string;
@@ -20,25 +21,13 @@ interface Car {
   fuelCapacity: string;
   heartImage: string;
 }
-export default function MoreCars() {
-  const [cards, setCards] = useState<Car[]>([]);
-
-  useEffect(() => {
-    const importCarData = async () => {
-      const res: Car[] = await client.fetch(
+export default async function MoreCars() {
+ const res: Car[] = await client.fetch(
         "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
       );
-      setCards(res);
+      
       if (!res || res.length === 0) {
-        importCarData();
-        const res: Car[] = await client.fetch(
-          "*[_type =='car'][]{ name, type, 'image':image.asset->url,'heartImage':heartImage.asset->url, transmission, fuelCapacity, pricePerDay,seatingCapacity}"
-        );
-        setCards(res);
-      }
-    };
-    importCarData();
-  }, [cards]);
+        importCarData();}
 
   return (
     <>
@@ -48,7 +37,7 @@ export default function MoreCars() {
         <div className="flex flex-col">
           <PickDrop />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-[32px] py-[36px]">
-            {cards.slice(3, 12).map((item: Car, index: number) => (
+            {res.slice(3, 12).map((item: Car, index: number) => (
               <div
                 className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]"
                 key={index}
