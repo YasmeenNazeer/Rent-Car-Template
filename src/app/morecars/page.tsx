@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/sidebar";
 import { client } from "@/sanity/lib/client";
-import { useEffect, useState } from "react";
+
 import { importCarData } from "@/services/api";
 
 interface Car {

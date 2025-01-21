@@ -25,7 +25,8 @@ async function HeroSection() {
 
     <PickDrop/>
     
-       <CarsSection/>
+        {await CarsSection()}
+       
     
     <div className=" w-full sm:w-[734px] h-[44px] mt-16 ml-0 sm:ml-[370px] flex flex-col sm:flex-row items-center  sm:justify-between mb-[64px] ">
   <div className="w-full sm:w-[156px] flex justify-center sm:justify-start ">

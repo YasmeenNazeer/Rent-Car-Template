@@ -18,12 +18,13 @@ export default async  function CarDetails({searchParams}:{searchParams:Promise<{
 
 
 
+
     <div className=" max-w-7xl p-8 ">
       <div className="rounded-2xl">
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* Left Section */}
           <div className="flex-1">
-          <div className=' gap-[32px]'>
+          <div className='gap-[32px]'>
 
   
   <div className="flex flex-col items-center md:items-start">
