@@ -44,7 +44,7 @@ deleteFunction(_id)
                 className="rounded-full object-cover"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ">
               <span className="text-sm font-medium text-[#323232]"><b>{name}</b></span>
               <span className="w-1 h-1 bg-[#323232] rounded-full" />
               <Badge variant="secondary" className="bg-blue-500 hover:bg-blue-500 text-white font-normal">
@@ -52,7 +52,7 @@ deleteFunction(_id)
               </Badge>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex">
             <Toaster richColors/>
             <Button variant="ghost" size="icon"
               onClick={handleUpdate} // <-- Hook up update
@@ -62,7 +62,7 @@ deleteFunction(_id)
             <Button variant="ghost" size="icon"
               onClick={handleDelete} // <-- Hook up delete 
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className=" h-4 w-4 mr-5" />
             </Button>
           </div>
         </div>

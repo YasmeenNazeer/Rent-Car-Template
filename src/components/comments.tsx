@@ -113,11 +113,11 @@ const deleteFunction = async (_id: string) => {
   }
 
   return (
-    <div  className='p-6'>
+    <div className="p-6">
     <div className="w-full p-6 bg-white border border-[#D4D7E5] rounded-lg">
       {!isExpanded ? (
         <div className="flex items-center gap-3">
-          <Avatar className="h-[59px] w-[59px] border-2 border-primary">
+          <Avatar className="h-12 w-12 border-2 border-primary">
             <AvatarImage src="/placeholder.svg" alt="User avatar" />
             <AvatarFallback>User</AvatarFallback>
           </Avatar>
@@ -125,14 +125,14 @@ const deleteFunction = async (_id: string) => {
             onClick={() => setIsExpanded(true)}
             className="flex-1 h-14 px-4 text-left text-[#565973] font-semibold bg-[#F3F3F3] border border-[#B4B7C9] rounded-[30px] hover:bg-gray-100 transition-colors"
           >
-            Add your comments here ...
+            Add your comments...
           </button>
         </div>
       ) : (
         <div className="space-y-5">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <Avatar className="h-[59px] w-[59px] border-2 border-primary">
+              <Avatar className="h-12 w-12 border-2 border-primary">
                 <AvatarImage src="/user.png" alt="User avatar" />
               </Avatar>
             </div>
@@ -140,13 +140,12 @@ const deleteFunction = async (_id: string) => {
               variant="ghost"
               size="icon"
               onClick={handleClose}
-              className="h-11 w-11"
+              className="h-9 w-9"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             </Button>
           </div>
-
-          {/* Added name input fields */}
+  
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
@@ -169,31 +168,34 @@ const deleteFunction = async (_id: string) => {
               />
             </div>
           </div>
-
+  
           <Textarea
             placeholder="Write your post or question here"
-            className="min-h-[250px] bg-[#F3F3F3] border-[#B4B7C9] resize-none"
+            className="min-h-[200px] bg-[#F3F3F3] border-[#B4B7C9] resize-none"
             value={message}
-            onChange={(e:any) => SetMessage(e.target.value)}
+            onChange={(e: any) => SetMessage(e.target.value)}
           />
           <div className="flex justify-end">
-            <Toaster richColors/>
-            <Button className="w-[161px] bg-blue-500 text-white hover:bg-blue-400 text-[18px] " onClick={postComment}>{btnName}</Button>
+            <Toaster richColors />
+            <Button className="w-full md:w-[161px] bg-blue-500 text-white hover:bg-blue-400 text-[16px]" onClick={postComment}>
+              {btnName}
+            </Button>
           </div>
         </div>
       )}
-
-      <hr className='my-4'/>
+  
+      <hr className="my-4" />
       {cmtArray.map((comment: Comment, index: number) => (
-         <ReviewCard
-         data={comment}
-         key={index}
-         setUpdateInputFields={setUpdateInputFields}
-         deleteFunction={deleteFunction}
-       />
+        <ReviewCard
+          data={comment}
+          key={index}
+          setUpdateInputFields={setUpdateInputFields}
+          deleteFunction={deleteFunction}
+         
+        />
       ))}
     </div>
   </div>
-
+  
   )
 }
