@@ -11,7 +11,7 @@ import CarsSection from './carsection'
 async function HeroSection() {
   return (
     <>
-   <div className="w-full flex justify-center items-center py-[32px] px-[64px] gap-[32px] ">
+   <div className="w-full flex justify-center items-center py-[26px] px-[24px] gap-[32px] ">
   {/* Hide this image on small screens */}
   <div >
     <Image src="/left-car.svg" alt="car" width={640} height={360} />
