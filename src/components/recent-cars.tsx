@@ -45,7 +45,7 @@ export async function RecentCars() {
 
 
      
-      {res.slice(3,9).map((item:Car, index:number) => (
+      {res.slice(7,13).map((item:Car, index:number) => (
               <div className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]" key={index}>
                 {/* Header Section */}
                 <div className="flex items-center justify-between">

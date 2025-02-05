@@ -23,7 +23,7 @@ async function HeroSection() {
   </div>
 </div>
 
-    <PickDrop/>
+   {/*<PickDrop/>*/}
     
         {await CarsSection()}
        

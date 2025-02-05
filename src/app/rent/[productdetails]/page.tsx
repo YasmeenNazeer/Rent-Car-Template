@@ -142,9 +142,8 @@ export default async  function CarDetails({searchParams}:{searchParams:Promise<{
                     </span>
                   </div>
                 </div>
-                <Link
-                  href={`/rentalform/rentform?image=${image}&name=${name}&pricePerDay=${pricePerDay}&type=${type}`}
-                >
+                <Link href={`/cart?image=${image}&name=${name}&type=${type}&pricePerDay=${pricePerDay}&transmission=${transmission}&fuelCapacity=${fuelCapacity}&seatingCapacity=${seatingCapacity}`}>
+                
                   <button className="rounded-lg bg-[#3563E9] px-4 py-2 sm:px-6 sm:py-2.5 text-white transition-colors hover:bg-[#4169E1]/90">
                     Rent Now
                   </button>

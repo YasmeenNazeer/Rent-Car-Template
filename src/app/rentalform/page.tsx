@@ -1,23 +1,50 @@
-'use client'
 
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+"use client"
+import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import {  Shield, Star } from 'lucide-react'
-import Image from "next/image"
-import Link from "next/link"
+} from "@/components/ui/select";
+import { Shield, Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { IconBaseProps } from "react-icons/lib";
+import { Separator } from "@/components/ui/separator";
+import { Alef } from "next/font/google";
 
-export default function CarRentalForm() {
+
+interface Icart {
+  name: string;
+  pricePerDay: number;
+  type: string;
+  image:string;
+
+}
+export default  function CarRentalForm(){
+  
+const [cartItem,setCartItem]= useState<Icart[]>([])
+
+  useEffect(() => {
+    const data = localStorage.getItem("cart");
+    const cart = data ? JSON.parse(data) : []
+
+  setCartItem(cart)
+    
+  }, []);
+ function handlePayment(){
+  alert("Payment Successful ✅")
+  localStorage.setItem("cart",JSON.stringify([]))
+ }
+
   return (
     <div className="container mx-auto p-3 sm:p-4 md:p-6 lg:p-8">
       <div className="grid gap-6 lg:grid-cols-[2fr,1fr]  flex-col lg:flex-row">
@@ -27,25 +54,45 @@ export default function CarRentalForm() {
           <div className="space-y-3 sm:space-y-4 bg-white p-4 sm:p-6 rounded-lg">
             <div className="flex items-center justify-between">
               <h2 className="text-lg sm:text-xl font-semibold">Billing Info</h2>
-              <span className="text-sm text-muted-foreground ">Step 1 of 4</span>
+              <span className="text-sm text-muted-foreground ">
+                Step 1 of 4
+              </span>
             </div>
-            <p className="text-sm text-muted-foreground">Please enter your billing info</p>
+            <p className="text-sm text-muted-foreground">
+              Please enter your billing info
+            </p>
             <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Your name" className="bg-[#F6F7F9]"/>
+                <Input
+                  id="name"
+                  placeholder="Your name"
+                  className="bg-[#F6F7F9]"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" placeholder="Phone number"className="bg-[#F6F7F9]" />
+                <Input
+                  id="phone"
+                  placeholder="Phone number"
+                  className="bg-[#F6F7F9]"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="address">Address</Label>
-                <Input id="address" placeholder="Address"className="bg-[#F6F7F9]" />
+                <Input
+                  id="address"
+                  placeholder="Address"
+                  className="bg-[#F6F7F9]"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="town">Town / City</Label>
-                <Input id="town" placeholder="Town or city"className="bg-[#F6F7F9]" />
+                <Input
+                  id="town"
+                  placeholder="Town or city"
+                  className="bg-[#F6F7F9]"
+                />
               </div>
             </div>
           </div>
@@ -56,8 +103,10 @@ export default function CarRentalForm() {
               <h2 className="text-lg sm:text-xl font-semibold">Rental Info</h2>
               <span className="text-sm text-muted-foreground">Step 2 of 4</span>
             </div>
-            <p className="text-sm text-muted-foreground">Please select your rental date</p>
-            
+            <p className="text-sm text-muted-foreground">
+              Please select your rental date
+            </p>
+
             {/* Pick-Up Section */}
             <div className="space-y-4">
               <div className="flex items-center gap-2">
@@ -69,7 +118,7 @@ export default function CarRentalForm() {
                   <Label htmlFor="pickup-location">Locations</Label>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your city"/>
+                      <SelectValue placeholder="Select your city" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ny">New York</SelectItem>
@@ -95,7 +144,7 @@ export default function CarRentalForm() {
                   <Label htmlFor="pickup-time">Time</Label>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your time"/>
+                      <SelectValue placeholder="Select your time" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="9am">9:00 AM</SelectItem>
@@ -118,7 +167,7 @@ export default function CarRentalForm() {
                   <Label htmlFor="dropoff-location">Locations</Label>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your city"/>
+                      <SelectValue placeholder="Select your city" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="ny">New York</SelectItem>
@@ -143,8 +192,8 @@ export default function CarRentalForm() {
                 <div className="space-y-2">
                   <Label htmlFor="dropoff-time">Time</Label>
                   <Select>
-                    <SelectTrigger >
-                      <SelectValue placeholder="Select your time"/>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your time" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="9am">9:00 AM</SelectItem>
@@ -160,21 +209,35 @@ export default function CarRentalForm() {
           {/* Payment Method Section */}
           <div className="space-y-3 sm:space-y-4 bg-white rounded-lg p-4 sm:p-6">
             <div className="flex items-center justify-between ">
-              <h2 className="text-lg sm:text-xl font-semibold">Payment Method</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">
+                Payment Method
+              </h2>
               <span className="text-sm text-muted-foreground">Step 3 of 4</span>
-            </div >
-            <p className="text-sm text-muted-foreground">Please enter your payment method</p>
-            
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Please enter your payment method
+            </p>
+
             <RadioGroup defaultValue="credit-card" className="space-y-4 ">
               {/* Credit Card Option */}
               <div className="rounded-lg border  p-4 bg-[#F6F7F9]">
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="credit-card" id="credit-card" className="bg-[#3563E9] text-[#3563E9]" />
+                    <RadioGroupItem
+                      value="credit-card"
+                      id="credit-card"
+                      className="bg-[#3563E9] text-[#3563E9]"
+                    />
                     <Label htmlFor="credit-card">Credit Card</Label>
                   </div>
                   <div className="flex gap-2">
-                    <Image src="/visa.png" alt="Visa" width={92} height={20} className="h-5 w-[92px]" />
+                    <Image
+                      src="/visa.png"
+                      alt="Visa"
+                      width={92}
+                      height={20}
+                      className="h-5 w-[92px]"
+                    />
                   </div>
                 </div>
                 <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -204,7 +267,12 @@ export default function CarRentalForm() {
                     <RadioGroupItem value="paypal" id="paypal" />
                     <Label htmlFor="paypal">PayPal</Label>
                   </div>
-                  <Image src="/paypal.png" alt="PayPal" width={50} height={24} />
+                  <Image
+                    src="/paypal.png"
+                    alt="PayPal"
+                    width={50}
+                    height={24}
+                  />
                 </div>
               </div>
 
@@ -215,7 +283,12 @@ export default function CarRentalForm() {
                     <RadioGroupItem value="bitcoin" id="bitcoin" />
                     <Label htmlFor="bitcoin">Bitcoin</Label>
                   </div>
-                  <Image src="/bitcoin.png" alt="Bitcoin" width={28} height={20} />
+                  <Image
+                    src="/bitcoin.png"
+                    alt="Bitcoin"
+                    width={28}
+                    height={20}
+                  />
                 </div>
               </div>
             </RadioGroup>
@@ -227,13 +300,17 @@ export default function CarRentalForm() {
               <h2 className="text-lg sm:text-xl font-semibold">Confirmation</h2>
               <span className="text-sm text-muted-foreground">Step 4 of 4</span>
             </div>
-            <p className="text-sm text-muted-foreground">We are getting to the end. Just few clicks and your rental is ready!</p>
+            <p className="text-sm text-muted-foreground">
+              We are getting to the end. Just few clicks and your rental is
+              ready!
+            </p>
 
             <div className="space-y-4 ">
               <div className="flex items-center space-x-2 bg-[#F6F7F9] rounded-lg py-[16px] px-[12px]">
                 <Checkbox id="marketing" />
                 <Label htmlFor="marketing" className="text-sm">
-                  I agree with sending an Marketing and newsletter emails. No spam, promised!
+                  I agree with sending an Marketing and newsletter emails. No
+                  spam, promised!
                 </Label>
               </div>
               <div className="flex items-center space-x-2 bg-[#F6F7F9] rounded-lg py-[16px] px-[12px]">
@@ -243,34 +320,47 @@ export default function CarRentalForm() {
                 </Label>
               </div>
             </div>
-            
-            <Button className="w-32 bg-[#3563E9] hover:bg-[#3563E9]">Rent Now</Button> 
+
+
+
+              <Link href={"/dashboard/id"}>
+
+            <Button className="w-32 mt-5 bg-[#3563E9] hover:bg-[#3563E9]">
+              Rent Now
+            </Button></Link>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Shield className="h-5 w-5" />
               <span className="text-black">All your data are safe</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              We are using the most advanced security to provide you the best experience ever.
+              We are using the most advanced security to provide you the best
+              experience ever.
             </p>
           </div>
         </div>
 
         {/* Right Column - Rental Summary */}
         <div className="lg:pl-6 mb-6 lg:mb-0 order-first lg:order-last">
-          <Card className="lg:sticky lg:top-4 p-4 sm:p-6">
+
+        {cartItem.map((item:Icart, index: number) => {
+            return (
+          <Card className="lg:sticky lg:top-4 p-4 sm:p-6"  key={index}>
             <div className="space-y-6">
               <div>
-                <h2 className="text-xl font-semibold mb-[4px]">Rental Summary</h2>
+                <h2 className="text-xl font-semibold mb-[4px]">
+                  Rental Summary
+                </h2>
                 <p className="text-sm text-muted-foreground">
-                  Prices may change depending on the length of the rental and the price of your rental car
+                  Prices may change depending on the length of the rental and
+                  the price of your rental car
                 </p>
               </div>
 
               <div className="flex items-start gap-4 ">
                 <div className="h-[80px] w-[100px] sm:h-[108px] sm:w-[132px] overflow-hidden rounded-lg bg-blue-600 mt-4 sm:mt-8">
                   <Image
-                    src="/car2.svg"
+                    src={item.image}
                     alt="Nissan GT-R"
                     width={80}
                     height={80}
@@ -278,45 +368,56 @@ export default function CarRentalForm() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold mt-4 sm:mt-12">Nissan GT - R</h3>
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4].map((star) => (
-                      <Star key={star} className="h-4 w-4 fill-current text-yellow-400" />
+   <h3 className="text-base sm:text-lg font-semibold mt-4 sm:mt-12">{item.name}</h3>
+                  <div className="flex items-center gap-1 mt-4">
+                    {[1, 2, 3,4].map((star) => (
+                      <Star
+                        key={star}
+                        className="h-4 w-4 fill-current text-yellow-400"
+                      />
                     ))}
                     <Star className="h-4 w-4 fill-current text-yellow-400/50" />
-                    <span className="text-sm text-muted-foreground">440+ Reviewer</span>
+                    <span className="text-sm text-muted-foreground ">
+                      440+Reviewer
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground  ">Subtotal</span>
-                  <span>$80.00</span>
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span>{item.pricePerDay}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Tax</span>
-                  <span>$0</span>
+                  <span>$0.00</span>
                 </div>
               </div>
 
-              <div className="flex gap-2">
-                <Input placeholder="Apply promo code" />
-                <Button variant="outline">Apply now</Button>
-              </div>
+              <Separator />
+               
 
               <div className="space-y-2">
                 <div className="flex justify-between font-semibold">
                   <span>Total Rental Price</span>
-                  <span>$80.00</span>
+                  <span>{item.pricePerDay}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Overall price and includes rental discount</p>
+                <p className="text-sm text-muted-foreground">
+                  Overall price and includes rental discount
+                </p>
               </div>
             </div>
+            
+            <Button className="w-full rounded-full py-5 bg-blue-600 mt-5" onClick={handlePayment}>Lets pay</Button>
           </Card>
+            );
+          })}
+
+          
         </div>
       </div>
     </div>
-  )
+  );
 }
 

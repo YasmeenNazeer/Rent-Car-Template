@@ -133,7 +133,7 @@ async function CarsSection() {
       </div>
       <div className="py-6 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {res.slice(5, 13).map((item: Car, index: number) => (
+          {res.slice(6,14).map((item: Car, index: number) => (
             <div
               className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]"
               key={index}

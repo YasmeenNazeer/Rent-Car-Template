@@ -35,9 +35,9 @@ export default async function MoreCars() {
         <Sidebar />
 
         <div className="flex flex-col">
-          <PickDrop />
+          {/*<PickDrop />*/}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-[32px] py-[36px]">
-            {res.slice(3, 12).map((item: Car, index: number) => (
+            {res.slice(1, 16).map((item: Car, index: number) => (
               <div
                 className="max-w-[304px] bg-white rounded-lg shadow-md p-[24px]"
                 key={index}
